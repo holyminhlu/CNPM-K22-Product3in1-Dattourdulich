@@ -37,10 +37,3 @@ jobs:
           push: true
           tags: huuluan2004/cheaptrip-auth-service:latest
 
-      # Build & push Frontend (nếu muốn)
-      - name: Build and push frontend
-        uses: docker/build-push-action@v5
-        with:
-          context: ./client/cheaptripfe
-          push: true
-          tags: huuluan2004/cheaptrip-frontend:latest 
