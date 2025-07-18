@@ -41,12 +41,4 @@ jobs:
           context: ./server/auth-service
           push: true
           tags: huuluan2004/cheaptrip-auth-service:latest
-      
-      # Build & push Booking Service
-      - name: Build and push booking-service
-        uses: docker/build-push-action@v5
-        with:
-          context: ./server/booking-service
-          push: true
-          tags: huuluan2004/cheaptrip-booking-service:latest
 
