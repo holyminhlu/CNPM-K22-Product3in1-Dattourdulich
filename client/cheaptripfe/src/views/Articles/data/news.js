@@ -234,7 +234,7 @@ const newsList = [
   // Bài viết 4 (copy từ bài 1, chỉnh sửa id, title, image, date, views)
   {
     id: 4,
-    image: '/img/Articles/news1.jpg',
+    image: '/img/Articles/thac.jpg',
     title: 'Trải nghiệm du thuyền Star Voyager dịp lễ 2/9',
     description: 'Du thuyền Star Voyager mang đến hành trình mới dịp lễ 2/9 với nhiều ưu đãi hấp dẫn.',
     date: '2025-08-15',
@@ -356,7 +356,7 @@ const newsList = [
   // Bài viết 5 (copy từ bài 2, chỉnh sửa id, title, image, date, views)
   {
     id: 5,
-    image: '/img/Articles/news2.jpg',
+    image: '/img/Articles/gocdao.jpg',
     title: 'Khám phá Koh Samui mùa hè 2025',
     description: 'Koh Samui – điểm đến lý tưởng cho mùa hè với biển xanh, cát trắng và nhiều hoạt động thú vị.',
     date: '2025-06-10',
@@ -431,7 +431,7 @@ const newsList = [
   // Bài viết 6 (copy từ bài 3, chỉnh sửa id, title, image, date, views)
   {
     id: 6,
-    image: '/img/Articles/news3.jpg',
+    image: '/img/Articles/anhbiendep.jpg',
     title: 'Top trải nghiệm không thể bỏ lỡ trên du thuyền Star Voyager',
     description: 'Khám phá những trải nghiệm tuyệt vời trên du thuyền Star Voyager dành cho gia đình và bạn bè.',
     date: '2025-05-20',
