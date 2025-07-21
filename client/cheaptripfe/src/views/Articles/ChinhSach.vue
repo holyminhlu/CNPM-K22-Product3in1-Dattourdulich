@@ -36,7 +36,6 @@
           </li>
         </ul>
       </aside>
-
       <!-- Cột nội dung bên phải với hiệu ứng chuyển đổi -->
       <transition name="fade-slide" mode="out-in">
         <main class="policy-content" :key="activePolicy.id">
@@ -167,7 +166,7 @@ export default {
           id: 'rieng-tu',
           title: 'Chính sách riêng tư',
           content: `
-            <h3>CHÍNH SÁCH RIÊNG TƯ</h3>
+            <h3>CHÍNH SÁCH VỀ QUYỀN RIÊNG TƯ</h3>
             <p>Chúng tôi cam kết bảo vệ sự riêng tư của bạn. Chính sách này mô tả cách chúng tôi thu thập, sử dụng và bảo vệ thông tin cá nhân của bạn.</p>
             <p><strong>1. Mục đích thu thập thông tin:</strong></p>
             <ul>
