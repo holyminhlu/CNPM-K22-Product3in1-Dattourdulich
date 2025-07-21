@@ -51,18 +51,17 @@
           </h2>
           <div class="intro-text-container">
             <p class="intro-text" data-aos="fade-up" data-aos-delay="200">
-              Trong thời đại công nghệ 4.0, Internet đã trở thành công cụ không thể thiếu khi lên kế hoạch du lịch. 
+              Trong thời đại công nghệ, Internet đã trở thành công cụ không thể thiếu khi lên kế hoạch du lịch. 
               CheapTrip ra đời như một giải pháp đột phá, kết nối mọi trải nghiệm du lịch chỉ với vài thao tác chạm.
             </p>
             <p class="intro-text" data-aos="fade-up" data-aos-delay="400">
-              Chúng tôi không chỉ là website đặt tour thông thường, mà là nền tảng tổng hợp đa dịch vụ từ vé máy bay, 
-              khách sạn, đến các trải nghiệm địa phương độc đáo với mức giá ưu đãi nhất.
+              Đến với Cheap Trip khách hàng sẽ tận hưởng các dịch vụ tiên tiến, nhanh gọn, tiện lợi,
+              các trải nghiệm địa phương độc đáo với mức giá ưu đãi nhất.
             </p>
           </div>
         </div>
       </div>
     </section>
-
     <!-- Benefits section with enhanced cards -->
     <section class="benefits-section">
       <div class="container">
