@@ -129,13 +129,6 @@ CheapTripAppChinhThuc/
 - Sử dụng file `.env` cho biến môi trường (port, secret, ...)
 - Không commit thông tin nhạy cảm lên repository
 
-## Đóng góp & Liên hệ
-- Đóng góp: Tạo Pull Request, Issue trên repository để báo lỗi hoặc đề xuất tính năng mới
-- Liên hệ: holyminhlu1@gmail.com (Minh Lữ) - Sđt: 0983149203
-- Liên hệ: nguyenhuuluan19092004@gmail.com (Hữu Luân)
-- Liên hệ: huynhkhai2062@gmail.com (Huỳnh Khải)
-- Mọi ý kiến đóng góp đều được trân trọng để hoàn thiện sản phẩm
-
 ## Hướng dẫn pull dự án về (Yêu cầu đã có cài đặt Docker và Docker Compose):
 - `Bước 1:` Tải file docker-compose.image.yml
 - `BƯớc 2:` cd vào thư mục chưa file docker-compose.image.yml vừa tải về
@@ -151,6 +144,13 @@ docker compose -f docker-compose.image.yml up -d
 ```bash
 docker-compose  up --build
 ```
+
+## Đóng góp & Liên hệ
+- Đóng góp: Tạo Pull Request, Issue trên repository để báo lỗi hoặc đề xuất tính năng mới
+- Liên hệ: holyminhlu1@gmail.com (Minh Lữ) - Sđt: 0983149203
+- Liên hệ: nguyenhuuluan19092004@gmail.com (Hữu Luân)
+- Liên hệ: huynhkhai2062@gmail.com (Huỳnh Khải)
+- Mọi ý kiến đóng góp đều được trân trọng để hoàn thiện sản phẩm
 
 ---
 **Bản quyền thuộc về Nguyễn Hữu Luân, Hồ Lý Minh Lữ, Huỳnh Khải - sinh viên Công nghệ Thông Tin, Trường Kỹ thuật và Công nghệ, Trường Đại học Trà Vinh.** 
