@@ -2,7 +2,7 @@ const Booking = require('../models/bookingModel');
 const axios = require('axios');
 const Bill = require('../models/billModel');
 
-// Hàm tạo booking_id duy nhất
+// Hàm tạo booking_id duy nhất 
 async function generateBookingId() {
   try {
     const lastBooking = await Booking.findOne().sort({ time_booking: -1 });
