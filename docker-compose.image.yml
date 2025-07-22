@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   client:
-    image: huuluan2004/cheaptrip-frontend:latest
+    image: huuluan2004/cheaptrip-client-website:latest
     ports:
       - "8080:80"
     depends_on:
