@@ -9,7 +9,7 @@
         <router-link to="/signin" class="login-btn">Đăng nhập ngay</router-link>
       </div>
       <div v-else class="booking-container">
-        <!-- Thông tin tour -->
+        <!-- Thông tin Tour -->
         <div class="tour-info">
           <h2>Thông tin tour</h2>
           <!-- Hộp thông tin giảm giá -->
