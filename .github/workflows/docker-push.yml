@@ -65,4 +65,12 @@ jobs:
           context: ./server/tours-service
           push: true
           tags: huuluan2004/cheaptrip-tours-service:latest
+      
+      # Build & push Frontend 
+      - name: Build and push frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./client/cheaptripfe
+          push: true
+          tags: huuluan2004/cheaptrip-frontend:latest 
 
