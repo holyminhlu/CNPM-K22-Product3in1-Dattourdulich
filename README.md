@@ -142,6 +142,7 @@ CheapTripAppChinhThuc/
 - `Bước 3:` chạy lệnh 
 ```bash
 docker compose -f docker-compose.image.yml up -d
+```
 
 ## Cách khác nếu bạn muốn xem code
 - `Bước 1:` clone code về máy
@@ -149,7 +150,7 @@ docker compose -f docker-compose.image.yml up -d
 - `Bước 3:` chạy lệnh 
 ```bash
 docker-compose  up --build
-
+```
 
 ---
 **Bản quyền thuộc về Nguyễn Hữu Luân, Hồ Lý Minh Lữ, Huỳnh Khải - sinh viên Công nghệ Thông Tin, Trường Kỹ thuật và Công nghệ, Trường Đại học Trà Vinh.** 
