@@ -49,4 +49,20 @@ jobs:
           context: ./server/booking-service
           push: true
           tags: huuluan2004/cheaptrip-booking-service:latest
+      
+      # Build & push Discounts Service
+      - name: Build and push discounts-service
+        uses: docker/build-push-action@v5
+        with:
+          context: ./server/discounts-service
+          push: true
+          tags: huuluan2004/cheaptrip-discounts-service:latest
+
+      # Build & push Tours Service
+      - name: Build and push tours-service
+        uses: docker/build-push-action@v5
+        with:
+          context: ./server/tours-service
+          push: true
+          tags: huuluan2004/cheaptrip-tours-service:latest
 
