@@ -1,7 +1,7 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = createProxyMiddleware({
-  target: 'http://localhost:3002',
+  target: process.env.TOURS_SERVICE_URL,
   changeOrigin: true,
   // Không cần pathRewrite, giữ nguyên path
 });

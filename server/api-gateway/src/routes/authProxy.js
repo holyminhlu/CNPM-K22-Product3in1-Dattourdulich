@@ -1,7 +1,7 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = createProxyMiddleware({
-  target: 'http://localhost:3001',
+  target: process.env.AUTH_SERVICE_URL,
   changeOrigin: true,
   pathRewrite: { '^/api/auth': '' }
 });

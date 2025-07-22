@@ -1,5 +1,6 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
+
 module.exports = createProxyMiddleware({
-  target: 'http://localhost:3003',
+  target: process.env.DISCOUNTS_SERVICE_URL,
   changeOrigin: true,
 });
