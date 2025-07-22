@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 const cors = require('cors');
+
 
 const authRoute = require('./routes/authRoute');
 
@@ -12,7 +13,10 @@ app.use(cors());
 app.use(express.json()); // Thêm lại để parse body JSON
 // Đã xoá app.use(express.json()) để tránh treo request khi dùng proxy
 
-mongoose.connect('mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/CheapTripDB')
+// Swagger UI
+
+
+mongoose.connect(process.env.MONGODB_URI)
     .then(()=>console.log('Kết nối MongoDB thành công'))
     .catch(err => console.error('Lỗi kết nối MongoDB',err));
 
@@ -23,7 +27,8 @@ app.get('/', (req, res)=>{
 });
 
 app.listen(PORT, () =>{
-    console.log(`Auth-Service đang lắng nghe tại http://localhost: ${PORT}`);
+    console.log(`Auth-Service đang lắng nghe tại http://auth-service: ${PORT}`);
+    
 })
 
 

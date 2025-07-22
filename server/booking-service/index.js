@@ -2,10 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bookingRoutes = require('./routes/bookingRoute');
+require('dotenv').config();
+
 
 const app = express();
 const PORT = 3004;
-const MONGO_URI = 'mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/BillsCheapTripDB';
+const BILLS_URI = process.env.BILLS_URI;
 
 // Middleware log mọi request tới backend
 app.use((req, res, next) => {
@@ -14,8 +16,16 @@ app.use((req, res, next) => {
 });
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:8080',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true // Nếu frontend có gửi cookie hoặc Authorization
+}));
+
 app.use(express.json());
+
+// Swagger UI
+
 
 // Routes
 app.use('/', bookingRoutes);
@@ -41,7 +51,7 @@ app.get('/api/all-bills', async (req, res) => {
   }
 });
 
-const bookingToursConnection = mongoose.createConnection('mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/BookingToursCheapTripDB', {
+const bookingToursConnection = mongoose.createConnection(process.env.BOOKING_TOURS_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -59,11 +69,12 @@ app.get('/api/all-bookings', async (req, res) => {
 });
 
 // MongoDB Connection
-mongoose.connect(MONGO_URI)
+mongoose.connect(BILLS_URI)
   .then(() => {
     console.log('Connected to BookingToursCheapTripDB');
     app.listen(PORT, () => {
       console.log(`Booking service is running on port ${PORT}`);
+     
     });
   })
   .catch((err) => {

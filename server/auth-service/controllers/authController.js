@@ -22,7 +22,7 @@ exports.CreateAccount = async (req, res) => {
         // Sinh token xác thực chứa thông tin user
         const token = jwt.sign(
             { fullName, email, passWord: hashedPassword },
-            'your_secret_key',
+            process.env.JWT_SECRET,
             { expiresIn: '1d' }
         );
 
@@ -31,8 +31,8 @@ exports.CreateAccount = async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'cheaptriptravelsp@gmail.com',
-                pass: 'qwnizhwwxasikeri'
+                user: process.env.EMAIL_CHEAPTRIP,
+                pass: process.env.EMAIL_PASS
             }
         });
 
@@ -82,24 +82,30 @@ exports.LoginAccount = async (req, res) => {
         if (!user) {
             return res.status(401).json({ error: 'Email hoặc mật khẩu không đúng' });
         }
-        // So sánh mật khẩu (nếu đã hash)
-        const isMatch = await bcrypt.compare(passWord, user.passWord);
-        if (!isMatch) {
-            return res.status(401).json({ error: 'Email hoặc mật khẩu không đúng' });
+
+        console.log('User status from DB:', user.status); // Log để kiểm tra status
+        if (user.status !== 'active') {
+            return res.status(403).json({ error: 'Tài khoản của bạn đã bị vô hiệu hóa, vui lòng liên hệ website để giải quyết hoặc đăng ký tài khoản mới' });
+        } else {
+            // So sánh mật khẩu (nếu đã hash)
+            const isMatch = await bcrypt.compare(passWord, user.passWord);
+            if (!isMatch) {
+                return res.status(401).json({ error: 'Email hoặc mật khẩu không đúng' });
+            }
+            // Đăng nhập thành công
+            // Sinh token nếu muốn (ví dụ dùng JWT)
+            const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+            res.status(200).json({
+                success: true,
+                message: 'Đăng nhập thành công!',
+                user: {
+                    id: user._id,
+                    fullName: user.fullName,
+                    email: user.email,
+                },
+                token
+            });
         }
-        // Đăng nhập thành công
-        // Sinh token nếu muốn (ví dụ dùng JWT)
-        const token = jwt.sign({ email: user.email, id: user._id }, 'your_secret_key', { expiresIn: '1d' });
-        res.status(200).json({
-            success: true,
-            message: 'Đăng nhập thành công!',
-            user: {
-                id: user._id,
-                fullName: user.fullName,
-                email: user.email,
-            },
-            token
-        });
     } catch (error) {
         res.status(500).json({ error: 'Đã có lỗi xảy ra khi đăng nhập' });
     }
@@ -191,12 +197,12 @@ exports.requestResetOtp = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'cheaptriptravelsp@gmail.com',
-        pass: 'qwnizhwwxasikeri'
+        user: process.env.EMAIL_CHEAPTRIP,
+        pass: process.env.EMAIL_PASS
       }
     });
     await transporter.sendMail({
-      from: 'CheapTrip <cheaptriptravelsp@gmail.com>',
+      from: `"CheapTrip" <${process.env.EMAIL_CHEAPTRIP}>`,
       to: email,
       subject: 'Mã OTP đặt lại mật khẩu CheapTrip',
       html: `<p>Mã OTP của bạn là: <b>${otp}</b>. Mã có hiệu lực trong 5 phút.</p>`
@@ -251,7 +257,7 @@ exports.verifyEmail = async (req, res) => {
     try {
         // Giải mã token nếu bị encode
         token = decodeURIComponent(token || '');
-        const decoded = jwt.verify(token, 'your_secret_key');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const { fullName, email, passWord } = decoded;
 
         // Kiểm tra email đã tồn tại chưa
