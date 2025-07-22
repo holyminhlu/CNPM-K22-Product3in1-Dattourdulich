@@ -1,6 +1,6 @@
 <template>
   <div class="hot-news-page" :class="{ 'is-detail-view': selectedNews }">
-    <!-- Hero Section -->
+
     <div class="hero-section">
       <div class="hero-content">
         <h1 class="hero-title">
