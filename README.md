@@ -136,5 +136,20 @@ CheapTripAppChinhThuc/
 - Liên hệ: huynhkhai2062@gmail.com (Huỳnh Khải)
 - Mọi ý kiến đóng góp đều được trân trọng để hoàn thiện sản phẩm
 
+## Hướng dẫn pull dự án về (Yêu cầu đã có cài đặt Docker và Docker Compose):
+- `Bước 1:` Tải file docker-compose.image.yml
+- `BƯớc 2:` cd vào thư mục chưa file docker-compose.image.yml vừa tải về
+- `Bước 3:` chạy lệnh 
+```bash
+docker compose -f docker-compose.image.yml up -d
+
+## Cách khác nếu bạn muốn xem code
+- `Bước 1:` clone code về máy
+- `BƯớc 2:` cd vào thư mục gốc của dự án
+- `Bước 3:` chạy lệnh 
+```bash
+docker-compose  up --build
+
+
 ---
 **Bản quyền thuộc về Nguyễn Hữu Luân, Hồ Lý Minh Lữ, Huỳnh Khải - sinh viên Công nghệ Thông Tin, Trường Kỹ thuật và Công nghệ, Trường Đại học Trà Vinh.** 
