@@ -7,7 +7,8 @@ const accountSchema = new mongoose.Schema({
     username: {type: String, required: false}, // Thêm trường username
     phone: {type: String, default: ''},
     address: {type: String, default: ''},
-    gender: {type: String, default: ''}
+    gender: {type: String, default: ''},
+    status: { type: String, default: 'active' } // Thêm trường status
 },{
     timestamps: true,
     collection: 'UserCollection'

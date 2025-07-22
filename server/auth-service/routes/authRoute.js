@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+// Import docs để Swagger scan
+
+// ... rest of the code
 const {CreateAccount, LoginAccount, getCustomerByEmail, updateCustomerInfo, checkEmailExists, verifyEmail} = require('../controllers/authController')
 
 router.post('/createaccount',CreateAccount);
