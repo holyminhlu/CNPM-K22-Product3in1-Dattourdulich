@@ -5,7 +5,7 @@ exports.getAllDiscounts = async (req, res) => {
     try {
         const discountsFromDb = await Discount.find({});
         
-        // Chuyển đổi dữ liệu để frontend dễ sử dụng hơn
+        //Chuyển đổi dữ liệu để frontend dễ sử dụng hơn
         const discounts = discountsFromDb.map(doc => {
             const discountObject = doc.toObject(); // Chuyển Mongoose doc thành object thuần
             // Ghi đè trường discount_percent bằng một con số đơn giản
