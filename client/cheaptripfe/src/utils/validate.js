@@ -190,7 +190,12 @@ export async function KiemTraDangNhap(email, password, router) {
             
             return { success: true, fullName: result.user.fullName };
         } else {
-            console.error("Lỗi từ server:", result);
+            // Sửa log lỗi chi tiết hơn
+            if (result && typeof result === 'object') {
+                console.error("Lỗi từ server:", JSON.stringify(result));
+            } else {
+                console.error("Lỗi từ server:", result);
+            }
             alert(result.error || result.message || "Email hoặc mật khẩu không đúng");
             return { success: false };
         }

@@ -298,7 +298,7 @@ export default {
       
       this.relatedArticles = this.news
         .filter(news => news.id !== this.selectedNews.id)
-        .slice(0, 3)
+        .slice(0, 6)
     },
     performSearch() {
       // Search functionality is handled by computed property

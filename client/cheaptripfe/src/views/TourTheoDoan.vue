@@ -12,7 +12,13 @@
       <p>Hiện tại không có tour nào thuộc danh mục này.</p>
     </div>
     <div v-else class="tours-grid">
-      <div v-for="tour in paginatedTours" :key="tour.tour_id || tour._id || tour.id" class="tour-card-home">
+      <router-link
+        v-for="tour in paginatedTours"
+        :key="tour.tour_id || tour._id || tour.id"
+        :to="`/tour/${tour.tour_id}`"
+        class="tour-card-home"
+        style="text-decoration: none;"
+      >
         <div v-if="Number(tour.discount_percent) > 0" class="discount-ribbon">
           <span>Giảm giá -{{ tour.discount_percent }}%</span>
         </div>
@@ -32,7 +38,7 @@
             {{ formatCurrency(tour.price_per_adult) }}
           </div>
         </div>
-      </div>
+      </router-link>
     </div>
     <!-- Pagination Controls -->
     <div class="pagination" style="display: flex; justify-content: center; align-items: center; margin: 24px 0 0 0; gap: 6px; flex-wrap: wrap;">
@@ -128,7 +134,7 @@ async function fetchTours() {
         return { ...tour, discount_percent: discount.discount_percent };
       }
       return tour;
-    });
+    }).filter(tour => !tour.isHidden); // Lọc bỏ tour bị ẩn
     // Reset về trang 1 nếu dữ liệu thay đổi
     currentPage.value = 1;
     console.log('Tour API data:', tours.value);

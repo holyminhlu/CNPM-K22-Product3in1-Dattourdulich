@@ -21,5 +21,5 @@ export default {
 </script>
 
 <style>
-
+  font-family: 'Montserrat', Arial, sans-serif !important;
 </style>

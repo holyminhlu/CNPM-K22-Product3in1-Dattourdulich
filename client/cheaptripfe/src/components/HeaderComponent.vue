@@ -117,7 +117,7 @@
     </div>
     <ul>
       <li><router-link to="/" @click="closeMenu">HOME</router-link></li>
-      <li><a href="" class="nav__link">TIN TỨC</a></li>
+      <li><router-link to="/hotnews" class="nav__link">TIN TỨC</router-link></li>
       <li class="dropdown">
         <div class="menudoc__link dropdown__link" @click="toggleTourMenu">
           ĐẶT TOUR<i style="font-size: 10pt; margin-left: 5px" class='fa-solid fa-chevron-down dropdown__icon'></i>
@@ -128,7 +128,7 @@
         </ul>
       </li>
       <li><router-link to='/gioithieu'  class="nav__link">GIỚI THIỆU</router-link></li>
-      <li><a href="" class="nav__link">CHÍNH SÁCH</a></li>
+      <li><router-link to="/chinhsach" class="nav__link">CHÍNH SÁCH</router-link></li>
       <li class="dropdown">
         <div class="menudoc__link dropdown__link" @click="toggleAccountMenu">
           <i class="fa-solid fa-user"></i>TÀI KHOẢN<i style="font-size: 10pt; margin-left: 5px" class='fa-solid fa-chevron-down dropdown__icon' :class="{ 'rotate': isAccountMenuOpen }"></i>

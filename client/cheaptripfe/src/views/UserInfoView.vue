@@ -105,8 +105,19 @@
             <p><strong>Khởi hành:</strong> {{ formatDate(booking.departure_date) }}</p>
             <p><strong>Trạng thái:</strong> <span :class="`status-${booking.payment_status.replace(/\s+/g, '-').toLowerCase()}`">{{ booking.payment_status }}</span></p>
             <p class="total-amount"><strong>Tổng tiền:</strong> {{ formatCurrency(booking.total_amount.$numberDecimal) }}</p>
-            <button v-if="booking.payment_status === 'chưa thanh toán'" class="payment-btn" @click="payWithVietQR(booking)">
+            <button
+              v-if="booking.status === 'pending'"
+              class="payment-btn"
+              @click="payWithVietQR(booking)"
+            >
               Thanh toán ngay
+            </button>
+            <button
+              v-if="booking.status === 'pending'"
+              class="cancel-btn"
+              @click="deleteBooking(booking.booking_id)"
+            >
+              Hủy
             </button>
           </div>
         </div>
@@ -187,13 +198,38 @@ async function fetchBookedTours(showAlert = false) {
 }
 
 async function submitInfo() {
+  // Xác định các trường có thể chỉnh sửa
+  const editableFields = ['phone', 'address', 'gender'];
+  const changedFields = {};
+
+  // So sánh từng trường với dữ liệu gốc
+  editableFields.forEach(field => {
+    if (user.value[field] !== originalUser.value[field]) {
+      changedFields[field] = user.value[field];
+    }
+  });
+
+  // Luôn gửi email để backend xác định user
+  changedFields.email = user.value.email;
+
   try {
-      await axios.post('http://localhost:3000/api/auth/customer/update', {
-      email: user.value.email,
-      phone: user.value.phone,
-      address: user.value.address,
-      gender: user.value.gender
-    });
+    if (
+      Object.keys(changedFields).length === editableFields.length + 1 // +1 vì có email
+    ) {
+      // Tất cả trường đều thay đổi => PUT
+      await axios.put('http://localhost:3000/api/auth/customer/update', {
+        email: user.value.email,
+        phone: user.value.phone,
+        address: user.value.address,
+        gender: user.value.gender
+      });
+    } else if (Object.keys(changedFields).length > 1) {
+      // Chỉ một phần trường thay đổi => PATCH
+      await axios.patch('http://localhost:3000/api/auth/customer/update', changedFields);
+    } else {
+      alert('Bạn chưa thay đổi thông tin nào!');
+      return;
+    }
     needEdit.value = false;
     isEditing.value = false;
     alert('Cập nhật thông tin thành công!');
@@ -215,6 +251,17 @@ function cancelEdit() {
 function payWithVietQR(booking) {
   selectedBooking.value = booking;
   showVietQR.value = true;
+}
+
+async function deleteBooking(bookingId) {
+  if (!confirm('Bạn có chắc chắn muốn hủy booking này?')) return;
+  try {
+    await axios.delete(`http://localhost:3000/api/bookings/${bookingId}`);
+    alert('Đã hủy booking thành công!');
+    fetchBookedTours(); // Cập nhật lại danh sách
+  } catch (err) {
+    alert(err.response?.data?.message || 'Hủy booking thất bại!');
+  }
 }
 
 function formatDate(dateString) {
@@ -511,6 +558,7 @@ h2 {
 
 .payment-btn {
   margin-top: 12px;
+  margin-right: 12px;
   background: #FF6200;
   color: #fff;
   border: none;
@@ -523,6 +571,23 @@ h2 {
 }
 .payment-btn:hover {
   background: #e65c00;
+  transform: translateY(-1px);
+}
+
+.cancel-btn {
+  margin-top: 12px;
+  background: #d9534f;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.cancel-btn:hover {
+  background: #c9302c;
   transform: translateY(-1px);
 }
 

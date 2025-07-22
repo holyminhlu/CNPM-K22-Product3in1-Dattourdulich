@@ -352,66 +352,6 @@ export default {
         }
       ];
     },
-    
-    setUserCommentRating(star) {
-      this.userCommentRating = star;
-    },
-
-    async submitRating() {
-      const id_tour = this.tour.tour_id;
-      const id_user = localStorage.getItem('userId') || '';
-      const rate = this.userCommentRating;
-      console.log('submitRating', { id_tour, id_user, rate });
-      if (!id_tour || !id_user || !rate) {
-        alert('Thiếu thông tin đánh giá!');
-        return;
-      }
-      try {
-        const res = await fetch('http://localhost:3005/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id_tour, id_user, rate })
-        });
-        const contentType = res.headers.get('content-type');
-        if (res.ok && contentType && contentType.includes('application/json')) {
-          const data = await res.json();
-          console.log('Đánh giá thành công:', data);
-          alert('Cảm ơn bạn đã đánh giá!');
-        } else {
-          const text = await res.text();
-          alert('Có lỗi khi gửi đánh giá: ' + text);
-        }
-      } catch (err) {
-        alert('Có lỗi khi gửi đánh giá: ' + err.message);
-      }
-    },
-
-    postComment() {
-      if (!this.newComment.trim()) return;
-
-      const newCommentData = {
-        id: Date.now(), // Dùng timestamp làm ID tạm thời
-        text: this.newComment,
-        date: "Vừa xong",
-        author: {
-          name: localStorage.getItem('userFullName') || 'Người dùng',
-          avatar: localStorage.getItem('userAvatar') || '/img/perfil.jpg'
-        },
-        rating: this.userCommentRating // Thêm rating vào dữ liệu bình luận
-      };
-      
-      // GIẢ LẬP API: Trong thực tế, bạn sẽ gửi bình luận này lên server
-      // await fetch(`/api/tours/${this.tour.id}/comments`, { method: 'POST', ... });
-      
-      // Thêm bình luận mới vào đầu danh sách để người dùng thấy ngay lập tức
-      this.comments.unshift(newCommentData);
-      
-      // Xóa nội dung trong textarea
-      this.newComment = '';
-      this.userCommentRating = 0; // Reset rating sau khi gửi
-      
-      console.log("Đã đăng bình luận mới:", newCommentData);
-    },
     async checkPaymentStatus() {
       const email = this.bookingInfo.email;
       const res = await fetch(`http://localhost:3000/api/booking/bookings/user/${email}`);

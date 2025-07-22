@@ -7,7 +7,7 @@ import router from './routes';
 import 'aos/dist/aos.css'; // Import CSS AOS
 import AOS from 'aos';     // Import thư viện JS
 import gsap from 'gsap';
-
+import './assets/main.css';
 
 createApp(App).use(router).mount('#app')
 AOS.init();

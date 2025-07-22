@@ -91,7 +91,7 @@ async function fetchTours() {
         return { ...tour, discount_percent: discount.discount_percent };
       }
       return tour;
-    });
+    }).filter(tour => !tour.isHidden); // Lọc bỏ tour bị ẩn
     // Reset về trang 1 nếu dữ liệu thay đổi
     currentPage.value = 1;
   } catch (err) {
