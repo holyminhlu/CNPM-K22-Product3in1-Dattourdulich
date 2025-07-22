@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  client:
+    image: huuluan2004/cheaptrip-frontend:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - api-gateway
+
+  api-gateway:
+    image: huuluan2004/cheaptrip-api-gateway:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - auth-service
+      - booking-service
+      - discounts-service
+      - tours-service
+    environment:
+      - TOURS_SERVICE_URL=http://tours-service:3002
+      - AUTH_SERVICE_URL=http://auth-service:3001
+      - BOOKING_SERVICE_URL=http://booking-service:3004
+      - DISCOUNTS_SERVICE_URL=http://discounts-service:3003
+
+  auth-service:
+    image: huuluan2004/cheaptrip-auth-service:latest
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_URL=mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/cheaptrip_auth?retryWrites=true&w=majority&appName=ClusterCheapTrip
+
+  booking-service:
+    image: huuluan2004/cheaptrip-booking-service:latest
+    ports:
+      - "3004:3004"
+    environment:
+      - MONGO_URL=mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/cheaptrip_booking?retryWrites=true&w=majority&appName=ClusterCheapTrip
+
+  discounts-service:
+    image: huuluan2004/cheaptrip-discounts-service:latest
+    ports:
+      - "3003:3003"
+    environment:
+      - MONGO_URL=mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/cheaptrip_discounts?retryWrites=true&w=majority&appName=ClusterCheapTrip
+
+  tours-service:
+    image: huuluan2004/cheaptrip-tours-service:latest
+    ports:
+      - "3002:3002"
+    environment:
+      - MONGO_URL=mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/cheaptrip_tours?retryWrites=true&w=majority&appName=ClusterCheapTrip
